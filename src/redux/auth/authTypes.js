@@ -1,0 +1,6 @@
+export const REGISTER_USER_DATA = 'REGISTER_USER_DATA';
+export const LOGIN_USER_DATA = 'LOGIN_USER_DATA';
+export const HANDLE_ERROR = 'HANDLE_ERROR';
+
+export const GET_REFRESH_TOKEN = 'GET_REFRESH_TOKEN';
+export const GET_USER_DATA = 'GET_USER_DATA';
