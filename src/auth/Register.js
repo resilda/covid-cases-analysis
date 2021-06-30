@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import initializeFirebase from '../config/Firebase';
 import { useHistory, Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { registerUser } from '../redux/auth/authActions';
 import Button from '@material-ui/core/Button';
 import FilledInput from '@material-ui/core/FilledInput';
 import InputAdornment from '@material-ui/core/InputAdornment';
@@ -11,6 +12,21 @@ import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
+	loginWrapper: {
+		display: 'flex',
+		alignItems: 'center',
+		justifyContent: 'space-between',
+		flexDirection: 'column',
+		// backgroundColor: '#f0f0f0',
+	},
+	header: {
+		fontSize: '37px',
+		fontFamily: 'Bebas Neue',
+		color: '#4a364b',
+		fontWeight: 'bolder',
+		marginTop: '65px',
+		marginBottom: '130px',
+	},
 	section: {
 		height: '550px',
 		width: '620px',
@@ -63,32 +79,42 @@ const useStyles = makeStyles({
 	link: {
 		color: 'white',
 		textDecoration: 'none'
+	},
+	footer: {
+		color: 'gray',
+		fontSize: '14px',
+		fontFamily: 'monospace',
+		marginTop: '150px',
 	}
 });
 
 export default function Register() {
-	const register = useSelector((state) => state.auth.register);
-	const error = useSelector((state) => state.auth.error);
+	const username = useSelector((state) => state.auth.register.username)
+	const email = useSelector((state) => state.auth.register.email);
+	const password = useSelector((state) => state.auth.register.password);
+	const registerError = useSelector((state) => state.auth.registerError);
 
-	const [ username, setUsername ] = useState(register.username);
-	const [ email, setEmail ] = useState(register.email);
-	const [ password, setPassword ] = useState(register.password);
+	const [ registerUsername, setRegisterUsername ] = useState(username);
+	const [ registerEmail, setRegisterEmail ] = useState(email);
+	const [ registerPassword, setRegisterPassword ] = useState(password);
 	const [ showPassword, setShowPassword ] = useState(false);
-	const [ setErrorMessage ] = useState(error);
+	const [ errorMessage, setErrorMessage ] = useState(registerError);
 
 	const history = useHistory();
+	const dispatch = useDispatch();
 	const classes = useStyles();
 
 	function handleSubmit(event) {
 		event.preventDefault();
 		initializeFirebase
 			.auth()
-			.createUserWithEmailAndPassword(email, password)
+			.createUserWithEmailAndPassword(registerEmail, registerPassword)
 			.then(() => {
 				const user = initializeFirebase.auth().currentUser;
 				user
-					.updateProfile({ displayName: username })
+					.updateProfile({ displayName: registerUsername })
 					.then(() => {
+						dispatch(registerUser(registerUsername, registerEmail, registerPassword))
 						history.push('/main');
 					})
 					.catch((error) => {
@@ -108,42 +134,42 @@ export default function Register() {
 
 	return (
 		<div>
-			<div className="login-wrapper">
-				<header className="header">Movie Box Edition</header>
+			<div className={classes.loginWrapper}>
+				<header className={classes.header}>Zandaka</header>
 				<section className={classes.section}>
 					<h1 className={classes.title}>Register</h1>
-					{error && <p className={classes.error}>{error.message}</p>}
+					{errorMessage && <p className={classes.error}>{errorMessage.message}</p>}
 					<form onSubmit={handleSubmit} className={classes.form}>
 						<FilledInput
 							id="username"
 							defaultValue="Username"
-							value={username}
+							value={registerUsername}
 							placeholder="Username"
 							type="text"
 							variant="outlined"
 							required
-							onChange={(event) => setUsername(event.target.value)}
+							onChange={(event) => setRegisterUsername(event.target.value)}
 							className={classes.input}
 						/>
 						<FilledInput
 							id="email"
 							defaultValue="Email"
-							value={email}
+							value={registerEmail}
 							placeholder="Email"
 							type="text"
 							variant="outlined"
 							required
-							onChange={(event) => setEmail(event.target.value)}
+							onChange={(event) => setRegisterEmail(event.target.value)}
 							className={classes.input}
 						/>
 						<FilledInput
 							id="password"
 							defaultValue="Password"
-							value={password}
+							value={registerPassword}
 							placeholder="Password"
 							variant="outlined"
 							required
-							onChange={(event) => setPassword(event.target.value)}
+							onChange={(event) => setRegisterPassword(event.target.value)}
 							type={showPassword ? 'text' : 'password'}
 							endAdornment={
 								<InputAdornment position="end">
@@ -171,9 +197,9 @@ export default function Register() {
 						</Button>
 					</div>
 				</section>
-				<footer className="footer">
+				<footer className={classes.footer}>
 					<p>We care about your opinion, so we would like your contribution to our platform.</p>
-					<h4>Contact us: movie_box@yahoo.com</h4>
+					<h4>Contact us: zandaka1@yahoo.com</h4>
 				</footer>
 			</div>
 			{password}

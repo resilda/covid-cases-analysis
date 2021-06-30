@@ -13,6 +13,13 @@ export function registerUser(username, email, password) {
 	};
 }
 
+export function handleErrorRegister(registerError) {
+	return {
+		type: actionTypes.HANDLE_ERROR_REGISTER,
+		payload: registerError
+	};
+}
+
 export function loginUser(email, password) {
 	return {
 		type: actionTypes.LOGIN_USER_DATA,
@@ -25,23 +32,35 @@ export function loginUser(email, password) {
 	};
 }
 
-export function handleError(error) {
+export function handleErrorLogin(loginError) {
 	return {
-		type: actionTypes.HANDLE_ERROR,
-		payload: error
-	};
+		type: actionTypes.HANDLE_ERROR_LOGIN,
+		payload: loginError
+	}
 }
 
-export function getRefreshToken(token) {
+export function setRefreshToken(token) {
 	return {
-		type: actionTypes.GET_REFRESH_TOKEN,
+		type: actionTypes.SET_REFRESH_TOKEN,
 		payload: token
 	};
 }
 
-export function getUserData(user) {
+export function setUserData(user) {
 	return {
-		type: actionTypes.GET_USER_DATA,
+		type: actionTypes.SET_USER_DATA,
 		payload: user
 	};
+}
+
+export function removeRefreshToken() {
+	return {
+		type: actionTypes.REMOVE_REFRESH_TOKEN
+	}
+}
+
+export function removeUserData() {
+	return {
+		type: actionTypes.REMOVE_USER_DATA
+	}
 }
