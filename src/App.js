@@ -1,22 +1,15 @@
-import React from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import Register from './auth/Register';
-import Login from './auth/Login';
-import HomePage from './components/HomePage';
-import './App.css';
+import React from "react";
+import Routes from './navigation/Routes'
+import { AuthProvider } from "./view/auth/AuthService";
 
 function App() {
-	return (
-		<div className="App">
-			<BrowserRouter>
-				<Switch>
-					<Route exact path="/" component={Register} />
-					<Route exact path="/login" component={Login} />
-					<Route exact path="/main" component={HomePage} />
-				</Switch>
-			</BrowserRouter>
-		</div>
-	);
+  return (
+    <div className="App">
+      <AuthProvider>
+        <Routes />
+      </AuthProvider>
+    </div>
+  );
 }
 
 export default App;
