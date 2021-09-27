@@ -1,10 +1,13 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useContext } from 'react'
+import firebase from '../../../config/firebase'
+import { useHistory } from 'react-router-dom'
+import { AuthContext } from '../../auth/AuthService'
 import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import dataActions from '../../../modules/data/dataActions'
 import { NavbarContainer } from './styles/NavbarContainer'
-import LayoutMenu from './LayoutMenu'
 import SearchIcon from '@material-ui/icons/Search'
+import ExitToAppIcon from '@material-ui/icons/ExitToApp'
 
 function Navbar({
   isGlobeFilterAvailable,
@@ -13,6 +16,19 @@ function Navbar({
 }) {
   const ref = useRef()
   const dispatch = useDispatch()
+
+  const history = useHistory()
+  const context = useContext(AuthContext)
+
+  function handleLogOut() {
+    firebase
+      .auth()
+      .signOut()
+      .then(() => {
+        context.logout()
+        history.push('/login')
+      })
+  }
 
   const submitFilterSearch = () => {
     dispatch(dataActions.fetchAllStatisticsData({ country: getCountryByUser }))
@@ -60,7 +76,14 @@ function Navbar({
               </div>
             </div>
           )}
-          <LayoutMenu />
+          <ExitToAppIcon
+            onClick={handleLogOut}
+            style={{
+              marginTop: '24px',
+              marginRight: '30px',
+              cursor: 'pointer',
+            }}
+          />
         </div>
       </div>
     </NavbarContainer>

@@ -20,17 +20,21 @@ export const CommentsContainer = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-left: 40px;
   }
 
   & .comments-text {
     color: #cc0000;
+    margin-left: 15% !important;
+    margin-bottom: 5%;
+    font-size: 26px;
   }
 
   & .comments-paragraph {
+    font-size: 16px;
     text-align: left;
-    width: 30%;
-    margin-bottom: 100px;
+    width: 50%;
+    margin-bottom: 5px;
+    margin-left: 18% !important;
   }
 
   & .comments-wrapper {
@@ -43,6 +47,24 @@ export const CommentsContainer = styled.div`
 
     box-shadow: 0 4px 8px 0 rgba(170, 169, 169, 0.2),
       0 6px 20px 0 rgba(131, 129, 129, 0.19);
+  }
+
+  & .previous-comments-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  & .previous-comment {
+    background: #303030;
+    color: white;
+    font-size: 15px;
+    width: 50%;
+    height: 35px;
+    border-radius: 5px;
+    margin: 20px 40px;
+    padding: 5px 5px;
+    text-align: left;
   }
 
   & .text-field-wrapper {
@@ -63,39 +85,36 @@ export const CommentsContainer = styled.div`
     padding-left: 20px;
   }
 
-  & .post-wrapper {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: space-between;
-  }
-
   & .elements-wrapper {
     display: flex;
     flex-direction: row;
-  }
-
-  .body {
-    color: #492b66;
-    margin-left: 10px;
+    justify-content: space-between;
+    background: #303030;
+    color: white;
+    font-size: 15px;
+    width: 50%;
+    height: 35px;
+    border-radius: 5px;
+    margin: 20px 40px;
+    padding: 5px 5px;
+    text-align: left;
   }
 
   & .button {
-    background-color: #492b66;
+    background-color: #0000cc;
+    border: none;
     color: white;
-    margin-left: 20px;
+    border-radius: 3px;
     width: 80px;
     height: 28px;
+    margin-left: 20px;
     margin-right: 20px;
+    cursor: pointer;
   }
 
-  & .delete-button {
-    background-color: #492b66;
-    color: white;
-    margin: 20px;
-    margin-left: 20px;
-    width: 55px;
-    height: 23px;
-    font-size: 11px;
+  & .delete-icon {
+    margin-top: 10px;
+    color: #ff3300;
+    cursor: pointer;
   }
 `

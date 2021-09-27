@@ -3,8 +3,8 @@ import styled from 'styled-components'
 export const LayoutMenuContainer = styled.nav`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  align-items: space-between;
+  justify-content: center;
+  align-items: center;
   transform: ${({ open }) => (open ? 'translateX(0)' : 'translateX(-100%)')};
   height: 100vh;
   text-align: left;
@@ -30,7 +30,6 @@ export const LayoutMenuContainer = styled.nav`
     backdrop-filter: blur(15px) contrast(45%) saturate(-1%) brightness(130%);
     content: '';
     height: 100%;
-    position: absolute;
     width: 100%;
   }
 

@@ -13,7 +13,12 @@ function Footer() {
         </div>
         <div className="footer-info">
           <GitHubIcon className="footer-icon github" />
-          Github Account
+          <a
+            href="https://github.com/resilda/covid-cases-analysis"
+            style={{ textDecoration: 'none', color: 'white' }}
+          >
+            github.com/covid-cases-analysis{' '}
+          </a>
         </div>
       </div>
     </FooterContainer>

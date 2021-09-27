@@ -100,7 +100,7 @@ export default function CovidStatistics() {
         <p className={classes.globeParagraph}>
           The second one represents Covid-19 cases in Albania, in the last
           couple of months. As you can see, the cases have had a raise and drop
-          depending in different periods of month.s
+          depending in different periods of month.
         </p>
       </div>
       <div className={classes.chartsWrapper}>

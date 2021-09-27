@@ -9,7 +9,6 @@ export const NavbarContainer = styled.div`
   }
 
   & .wrapper {
-    /* color: #ccffcc; */
     color: white;
     display: flex;
     justify-content: space-between;
@@ -17,7 +16,7 @@ export const NavbarContainer = styled.div`
   }
 
   & .title {
-    margin-left: 70px;
+    margin-left: 30px;
   }
 
   & .filter-wrapper {
